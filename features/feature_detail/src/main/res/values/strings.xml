@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_title">Detalle del documento</string>
+    <string name="detail_authentication_title">Autenticación requerida</string>
+    <string name="detail_authentication_subtitle">Verifica tu identidad para ver este documento</string>
+    <string name="detail_delete_title">Eliminar documento</string>
+    <string name="detail_delete_message">¿Estás seguro de que deseas eliminar %1$s?</string>
+    <string name="detail_delete_confirm_title">Confirmar eliminación</string>
+    <string name="detail_delete_confirm_subtitle">Verifica tu identidad para eliminar este documento</string>
+    <string name="detail_delete_button">Eliminar</string>
+    <string name="detail_cancel_button">Cancelar</string>
+    <string name="detail_location_unavailable">Ubicación no disponible</string>
+    <string name="detail_access_history_title">Historial de accesos</string>
+    <string name="detail_error_retry">Reintentar</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_state_default_title">Sin resultados</string>
+    <string name="loading_description">Cargando</string>
+    <string name="error_retry_button">Reintentar</string>
+</resources>

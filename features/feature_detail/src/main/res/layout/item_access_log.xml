@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_access_date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="8dp"
+    android:gravity="center_vertical"
+    android:padding="8dp"
+    android:textSize="13sp"
+    app:drawableStartCompat="@android:drawable/ic_menu_recent_history" />

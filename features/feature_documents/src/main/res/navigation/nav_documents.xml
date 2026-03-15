@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/documents_graph"
+    app:startDestination="@id/documentsFragment">
+
+    <fragment
+        android:id="@+id/documentsFragment"
+        android:name="com.docvault.feature.documents.presentation.ui.DocumentsFragment"
+        android:label="@string/documents_title">
+        <action
+            android:id="@+id/action_documents_to_camera"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.docvault.lib.camera.ui.CameraFragment"
+        android:label="@string/camera_title" />
+
+</navigation>

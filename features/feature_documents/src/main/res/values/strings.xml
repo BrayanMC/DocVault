@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="documents_title">Mis documentos</string>
+    <string name="documents_filter_all">Todos</string>
+    <string name="documents_filter_pdf">PDF</string>
+    <string name="documents_filter_image">Imagen</string>
+    <string name="documents_empty_title">Sin documentos</string>
+    <string name="documents_empty_message">Agrega tu primer documento usando el botón inferior</string>
+    <string name="documents_add_title">Agregar documento</string>
+    <string name="documents_add_gallery">Elegir de galería</string>
+    <string name="documents_add_camera">Tomar una foto</string>
+    <string name="documents_add_pdf">Seleccionar PDF</string>
+    <string name="documents_delete_title">Eliminar documento</string>
+    <string name="documents_delete_message">¿Estás seguro de que deseas eliminar %1$s?</string>
+    <string name="documents_delete_confirm">Eliminar</string>
+    <string name="documents_cancel">Cancelar</string>
+    <string name="documents_fab_description">Agregar documento</string>
+    <string name="documents_permission_denied">Permiso denegado. Actívalo en configuración.</string>
+    <string name="camera_title">Cámara</string>
+</resources>

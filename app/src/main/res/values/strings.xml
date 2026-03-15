@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DocVault</string>
+    <string name="title_feature_documents">Mis documentos</string>
+    <string name="title_feature_detail">Detalle del documento</string>
+</resources>

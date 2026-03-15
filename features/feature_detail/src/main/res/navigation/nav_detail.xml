@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_graph"
+    app:startDestination="@id/detailFragment">
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.docvault.feature.detail.presentation.ui.DetailFragment"
+        android:label="@string/detail_title">
+
+        <argument
+            android:name="document_id"
+            app:argType="string" />
+
+    </fragment>
+
+</navigation>
