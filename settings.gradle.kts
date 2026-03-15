@@ -37,8 +37,8 @@ include(":domain")
 include(":data")
 
 // Features
-include(":features:feature_documents")
-include(":features:feature_detail")
+include(":features:feature-documents")
+include(":features:feature-detail")
 
 // Libraries
 include(":libraries:lib-security")

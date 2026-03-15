@@ -81,7 +81,7 @@ class DocumentsViewModelTest {
         viewModel.uiState.test {
             val state = awaitItem()
             assertTrue(state is DocumentsUiState.Success)
-            assertEquals(1, (state as DocumentsUiState.Success).documents.size)
+            assertEquals(1, state.documents.size)
             cancelAndIgnoreRemainingEvents()
         }
     }

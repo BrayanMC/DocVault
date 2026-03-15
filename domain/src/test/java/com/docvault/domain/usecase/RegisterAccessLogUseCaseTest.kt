@@ -6,6 +6,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -21,21 +22,13 @@ class RegisterAccessLogUseCaseTest {
     }
 
     @Test
-    fun `invoke calls repository registerAccess`() = runTest {
-        coEvery { repository.registerAccess("1") } returns DocVaultResult.Success(Unit)
-
-        useCase("1")
-
-        coVerify { repository.registerAccess("1") }
-    }
-
-    @Test
-    fun `invoke returns Success when registration succeeds`() = runTest {
+    fun `invoke calls repository and returns Success`() = runTest {
         coEvery { repository.registerAccess("1") } returns DocVaultResult.Success(Unit)
 
         val result = useCase("1")
 
         assertTrue(result is DocVaultResult.Success)
+        coVerify { repository.registerAccess("1") }
     }
 
     @Test
@@ -47,5 +40,9 @@ class RegisterAccessLogUseCaseTest {
         val result = useCase("1")
 
         assertTrue(result is DocVaultResult.Error)
+        assertEquals(
+            "Error al registrar acceso",
+            (result as DocVaultResult.Error).throwable.message
+        )
     }
 }

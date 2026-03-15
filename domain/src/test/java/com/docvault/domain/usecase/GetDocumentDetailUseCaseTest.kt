@@ -36,22 +36,14 @@ class GetDocumentDetailUseCaseTest {
     }
 
     @Test
-    fun `invoke calls repository getDocumentById`() = runTest {
-        coEvery { repository.getDocumentById("1") } returns DocVaultResult.Success(fakeDocument)
-
-        useCase("1")
-
-        coVerify { repository.getDocumentById("1") }
-    }
-
-    @Test
-    fun `invoke returns Success with document`() = runTest {
+    fun `invoke calls repository and returns Success with document`() = runTest {
         coEvery { repository.getDocumentById("1") } returns DocVaultResult.Success(fakeDocument)
 
         val result = useCase("1")
 
         assertTrue(result is DocVaultResult.Success)
         assertEquals(fakeDocument, (result as DocVaultResult.Success).data)
+        coVerify { repository.getDocumentById("1") }
     }
 
     @Test
@@ -63,5 +55,6 @@ class GetDocumentDetailUseCaseTest {
         val result = useCase("1")
 
         assertTrue(result is DocVaultResult.Error)
+        assertEquals("Document not found: 1", (result as DocVaultResult.Error).throwable.message)
     }
 }

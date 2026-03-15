@@ -1,4 +1,4 @@
-package com.docvault.data.repository
+package com.docvault.data.mappers
 
 import com.docvault.data.database.entity.DocumentEntity
 import com.docvault.data.mapper.toDomain

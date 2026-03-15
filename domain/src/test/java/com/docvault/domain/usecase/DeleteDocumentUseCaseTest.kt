@@ -8,6 +8,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -35,21 +36,13 @@ class DeleteDocumentUseCaseTest {
     }
 
     @Test
-    fun `invoke calls repository deleteDocument`() = runTest {
-        coEvery { repository.deleteDocument(fakeDocument) } returns DocVaultResult.Success(Unit)
-
-        useCase(fakeDocument)
-
-        coVerify { repository.deleteDocument(fakeDocument) }
-    }
-
-    @Test
-    fun `invoke returns Success when repository succeeds`() = runTest {
+    fun `invoke calls repository and returns Success`() = runTest {
         coEvery { repository.deleteDocument(fakeDocument) } returns DocVaultResult.Success(Unit)
 
         val result = useCase(fakeDocument)
 
         assertTrue(result is DocVaultResult.Success)
+        coVerify { repository.deleteDocument(fakeDocument) }
     }
 
     @Test
@@ -61,5 +54,6 @@ class DeleteDocumentUseCaseTest {
         val result = useCase(fakeDocument)
 
         assertTrue(result is DocVaultResult.Error)
+        assertEquals("Error al eliminar", (result as DocVaultResult.Error).throwable.message)
     }
 }

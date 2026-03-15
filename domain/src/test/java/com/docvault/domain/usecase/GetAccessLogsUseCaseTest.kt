@@ -1,11 +1,11 @@
 package com.docvault.domain.usecase
 
+import app.cash.turbine.test
 import com.docvault.core.common.result.DocVaultResult
 import com.docvault.domain.model.AccessLog
 import com.docvault.domain.repository.AccessLogRepository
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -29,24 +29,16 @@ class GetAccessLogsUseCaseTest {
     }
 
     @Test
-    fun `invoke calls repository getAccessLogs`() = runTest {
-        every { repository.getAccessLogs("1") } returns flowOf(
-            DocVaultResult.Success(fakeAccessLogs)
-        )
-
-        useCase("1")
-
-        verify { repository.getAccessLogs("1") }
-    }
-
-    @Test
     fun `invoke returns access logs from repository`() = runTest {
         every { repository.getAccessLogs("1") } returns flowOf(
             DocVaultResult.Success(fakeAccessLogs)
         )
 
-        useCase("1").collect { result ->
-            assertEquals(DocVaultResult.Success(fakeAccessLogs), result)
+        useCase("1").test {
+            val result = awaitItem()
+            assertTrue(result is DocVaultResult.Success)
+            assertEquals(fakeAccessLogs, (result as DocVaultResult.Success).data)
+            awaitComplete()
         }
     }
 
@@ -56,9 +48,11 @@ class GetAccessLogsUseCaseTest {
             DocVaultResult.Success(emptyList())
         )
 
-        useCase("1").collect { result ->
+        useCase("1").test {
+            val result = awaitItem()
             assertTrue(result is DocVaultResult.Success)
-            assertEquals(0, (result as DocVaultResult.Success).data.size)
+            assertTrue((result as DocVaultResult.Success).data.isEmpty())
+            awaitComplete()
         }
     }
 }

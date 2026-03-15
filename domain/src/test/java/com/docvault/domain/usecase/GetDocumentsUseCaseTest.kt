@@ -1,15 +1,16 @@
 package com.docvault.domain.usecase
 
+import app.cash.turbine.test
 import com.docvault.core.common.result.DocVaultResult
 import com.docvault.domain.model.Document
 import com.docvault.domain.model.DocumentType
 import com.docvault.domain.repository.DocumentRepository
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -38,25 +39,31 @@ class GetDocumentsUseCaseTest {
     }
 
     @Test
-    fun `invoke with null type calls getAllDocuments`() = runTest {
+    fun `invoke with null type returns Success with documents`() = runTest {
         every { repository.getAllDocuments() } returns flowOf(
             DocVaultResult.Success(fakeDocuments)
         )
 
-        useCase(null)
-
-        verify { repository.getAllDocuments() }
+        useCase(null).test {
+            val result = awaitItem()
+            assertTrue(result is DocVaultResult.Success)
+            assertEquals(fakeDocuments, (result as DocVaultResult.Success).data)
+            awaitComplete()
+        }
     }
 
     @Test
-    fun `invoke with PDF type calls getDocumentsByType`() = runTest {
+    fun `invoke with PDF type returns Success with empty list`() = runTest {
         every { repository.getDocumentsByType(DocumentType.PDF) } returns flowOf(
             DocVaultResult.Success(emptyList())
         )
 
-        useCase(DocumentType.PDF)
-
-        verify { repository.getDocumentsByType(DocumentType.PDF) }
+        useCase(DocumentType.PDF).test {
+            val result = awaitItem()
+            assertTrue(result is DocVaultResult.Success)
+            assertTrue((result as DocVaultResult.Success).data.isEmpty())
+            awaitComplete()
+        }
     }
 
     @Test
@@ -65,9 +72,10 @@ class GetDocumentsUseCaseTest {
             DocVaultResult.Success(fakeDocuments)
         )
 
-        val flow = useCase(null)
-        flow.collect { result ->
+        useCase(null).test {
+            val result = awaitItem()
             assertEquals(DocVaultResult.Success(fakeDocuments), result)
+            awaitComplete()
         }
     }
 }

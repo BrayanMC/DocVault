@@ -8,6 +8,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -35,23 +36,14 @@ class AddDocumentUseCaseTest {
     }
 
     @Test
-    fun `invoke calls repository addDocument`() = runTest {
-        val bytes = byteArrayOf(1, 2, 3)
-        coEvery { repository.addDocument(fakeDocument, bytes) } returns DocVaultResult.Success(Unit)
-
-        useCase(fakeDocument, bytes)
-
-        coVerify { repository.addDocument(fakeDocument, bytes) }
-    }
-
-    @Test
-    fun `invoke returns Success when repository succeeds`() = runTest {
+    fun `invoke calls repository and returns Success`() = runTest {
         val bytes = byteArrayOf(1, 2, 3)
         coEvery { repository.addDocument(fakeDocument, bytes) } returns DocVaultResult.Success(Unit)
 
         val result = useCase(fakeDocument, bytes)
 
         assertTrue(result is DocVaultResult.Success)
+        coVerify { repository.addDocument(fakeDocument, bytes) }
     }
 
     @Test
@@ -64,5 +56,6 @@ class AddDocumentUseCaseTest {
         val result = useCase(fakeDocument, bytes)
 
         assertTrue(result is DocVaultResult.Error)
+        assertEquals("Error al guardar", (result as DocVaultResult.Error).throwable.message)
     }
 }

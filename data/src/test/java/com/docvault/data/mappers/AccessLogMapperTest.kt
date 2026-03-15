@@ -1,4 +1,4 @@
-package com.docvault.data.repository
+package com.docvault.data.mappers
 
 import com.docvault.data.database.entity.AccessLogEntity
 import com.docvault.data.mapper.toDomain
